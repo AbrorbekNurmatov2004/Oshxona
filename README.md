@@ -34,10 +34,11 @@ An enterprise-grade restaurant automation system built with **Java 17** and **Sp
 * 🗄️ **Repository** – Handles persistent data storage via Spring Data JPA.
 * 📦 **DTO** – Structures Request / Response data transfer objects.
 
----
+------
 
 ## 📂 Project Structure
-```
+
+```text
 src/main/java/oshxona
 ├── aop/                   
 ├── bot/
