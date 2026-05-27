@@ -18,9 +18,10 @@ An enterprise-grade restaurant automation system built with **Java 17** and **Sp
 
 ## 🏗️ Architecture
 
-[ Web Browser ]  ── [ Spring MVC Controller ]   ──┐
-                                                  ├──[ Service Layer ] ── [ Repository ] ── [ PostgreSQL ]
-[ Telegram User ] ──  [ Telegram Bot Engine ]   ──┘
+```text
+[ Web Browser ]   ──➔  [ Spring MVC Controller ]  ──┐
+                                                      ├──➔ [ Service Layer ] ──➔ [ Repository ] ──➔ [ PostgreSQL ]
+[ Telegram User ] ──➔  [ Telegram Bot Engine ]    ──┘
 
 ---
 
