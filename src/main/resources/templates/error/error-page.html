@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xatolik yuz berdi</title>
+    <style>
+        .error-container { text-align: center; margin-top: 100px; font-family: sans-serif; }
+        .error-code { font-size: 72px; color: #ff4d4d; margin: 0; }
+        .error-message { font-size: 24px; color: #333; }
+        .back-btn { display: inline-block; margin-top: 200px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1 class="error-code" th:text="${status}">404</h1>
+    <p class="error-message" th:text="${errorMessage}">Resurs topilmadi!</p>
+    <a href="/users" class="back-btn">Bosh sahifaga qaytish</a>
+</div>
+</body>
+</html>

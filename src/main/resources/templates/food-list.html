@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="~{fragments :: header_head}"></th:block>
+    <title>Taomlar Menusi — Oshxona</title>
+    <style>
+        .main-content {
+            padding: 40px;
+            margin-left: 260px;
+            min-height: 100vh;
+            background: #0f111a;
+            color: #f8f9fa;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            max-width: 450px;
+            margin-bottom: 24px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #151824;
+            border: 1px solid #222638;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent, #ff4a5a);
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--accent, #ff4a5a);
+            color: #fff;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            background: #e03e4e;
+        }
+
+        .btn-cancel {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: transparent;
+            border: 1px solid #222638;
+            color: #a0aec0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel:hover {
+            background: #ff4a5a;
+            color: #fff;
+            border-color: #ff4a5a;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 14px;
+            background: #151824;
+            border: 1px solid #222638;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #222638;
+        }
+
+        .food-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #11131e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #1c1f30;
+        }
+
+        .food-table th, .food-table td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #1c1f30;
+        }
+
+        .food-table th {
+            background: #151824;
+            color: #6c7293;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+        }
+
+        .food-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .food-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #222638;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-active {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.15);
+        }
+
+        .badge-inactive {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.15);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-sm {
+            font-size: 13px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .page-link {
+            padding: 10px 18px;
+            background: #11131e;
+            border: 1px solid #1c1f30;
+            color: #a0aec0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .page-link:hover {
+            background: #151824;
+            color: #fff;
+        }
+
+        .page-link.active {
+            background: var(--accent, #ff4a5a);
+            color: white;
+            border-color: var(--accent, #ff4a5a);
+        }
+
+        .food-code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #151824;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #f6ad55;
+            font-weight: bold;
+            border: 1px solid #222638;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="~{fragments :: sidebar(activePage='foods')}"></div>
+
+<main class="main-content">
+
+    <div class="header-section">
+        <h1 class="page-title">🍽️ Taomlar Menusi</h1>
+        <a th:href="@{/foods/create}" class="btn-submit">+ Yangi taom qo'shish</a>
+    </div>
+
+    <form th:action="@{/foods}" method="get" class="search-box">
+        <input type="text" name="search" th:value="${search}" class="form-control"
+               placeholder="Taom nomi yoki kodini yozing..."/>
+        <button type="submit" class="btn-submit">🔍 Izlash</button>
+    </form>
+
+    <table class="food-table">
+        <thead>
+        <tr>
+            <th>Rasm</th>
+            <th>Taom kodi</th>
+            <th>Nomi</th>
+            <th>Narxi</th>
+            <th>Holati</th>
+            <th>Amallar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="food : ${foods}">
+            <td>
+                <img th:if="${food.image != null and food.image != ''}" th:src="${food.image}" class="food-img"
+                     alt="Taom"/>
+                <div th:if="${food.image == null or food.image == ''}" class="food-img"
+                     style="background: #151824; display:flex; align-items:center; justify-content:center; color:#a0aec0; border: 1px solid #222638;">
+                    🖼️
+                </div>
+            </td>
+            <td>
+                <span th:if="${food.code != null}" th:text="${food.code}" class="food-code"></span>
+                <span th:if="${food.code == null}" style="color: #6c7293; font-size: 13px;">Kodsiz</span>
+            </td>
+            <td th:text="${food.name}" style="font-weight: 600;"></td>
+            <td th:text="${#numbers.formatDecimal(food.price, 0, 'COMMA', 0, 'POINT') + ' UZS'}"
+                style="color: #48bb78; font-weight: 600;">
+            </td>
+            <td>
+                <span th:if="${food.active}" class="badge badge-active">Menuda mavjud</span>
+                <span th:if="${!food.active}" class="badge badge-inactive">Menuda mavjud emas</span>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a th:href="@{/foods/active/{id}(id=${food.id})}"
+                       th:class="${food.active} ? 'btn-cancel btn-sm' : 'btn-submit btn-sm'"
+                       th:text="${food.active} ? 'No Active' : 'Active'"
+                       style="padding: 6px 12px; height: auto;">Holat</a>
+                    <a th:href="@{/foods/update/{id}(id=${food.id})}" class="btn-secondary btn-sm">✏️</a>
+                    <a th:href="@{/foods/delete/{id}(id=${food.id})}"
+                       class="btn-cancel btn-sm"
+                       style="border-color: rgba(220,53,69,0.2); color: #dc3545;"
+                       onclick="return confirm('Rostdan ham ushbu taomni o\'chirmoqchimisiz?')">🗑️</a>
+                </div>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(foods)}">
+            <td colspan="7" style="text-align: center; color: #a0aec0; padding: 40px;">
+                🔍 Qidiruv bo'yicha hech qanday taom topilmadi.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="pagination" th:if="${totalPages > 0}">
+        <a th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+           th:href="@{/foods(page=${i}, search=${search})}"
+           th:text="${i + 1}"
+           th:class="${currentPage == i} ? 'page-link active' : 'page-link'">1</a>
+    </div>
+</main>
+
+</body>
+</html>
