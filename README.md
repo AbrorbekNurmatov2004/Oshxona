@@ -6,8 +6,8 @@
 https://oshxona-hudo.onrender.com/orders
 
 👤 **Admin Login:**
-- Username: `admin`
-- Phone number: `+998901112233`
+- Username: `1`
+- Phone number: `1`
 
 An enterprise-grade restaurant automation system built with **Java 17** and **Spring Boot 3**. The system consists of two core components: a **Spring MVC Web Panel** for administrators and an interactive **Telegram Bot** for customers.
 
