@@ -17,7 +17,7 @@ public class OshxonaApplication {
         SpringApplication.run(OshxonaApplication.class, args);
     }
 
-    /*@Bean*/
+    @Bean
     public CommandLineRunner init(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
                 User authUser = new User();
