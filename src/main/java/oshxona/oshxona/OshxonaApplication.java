@@ -22,12 +22,12 @@ public class OshxonaApplication {
     @Bean
     public CommandLineRunner init(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            String adminPhone = "+998901112233";
+            String adminPhone = "1";
             if (!userRepository.existsByPhone(adminPhone)) {
                 User admin = new User();
                 admin.setPhone(adminPhone);
                 admin.setFullName("Super Admin");
-                admin.setPassword(passwordEncoder.encode("admin"));
+                admin.setPassword(passwordEncoder.encode("1"));
                 userRepository.save(admin);
             } else {
                log.info("--> Admin allaqachon bazada bor <--");
