@@ -99,7 +99,6 @@ src/main/java/oshxona
 * 🔍 **Dynamic Filtering & Search** – Optimized query capabilities for database entities.
 * 👑 **Role-Based Authorization** – Strict user access control and permission enforcement.
 * 📝 **JPA Auditing** – Automatic tracking of entity lifecycles (`createdAt`, `updatedAt`, `createdBy`, `updatedBy`).
-* 🎯 **Centralized Error Handling** – Clean, application-wide exception management via `@ControllerAdvice`.
 
 ---
 
