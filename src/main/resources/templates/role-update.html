@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments :: header_head}"></th:block>
+    <title>Rolni tahrirlash — Oshxona</title>
+    <style>
+        .form-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .form-control { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+        .form-control:focus { border-color: var(--accent); }
+        .error-message { color: var(--red); font-size: 12px; margin-top: 6px; font-weight: 500; }
+
+        .permissions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 20px; max-height: 280px; overflow-y: auto; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; color: var(--text2); font-size: 14px; cursor: pointer; padding: 6px; border-radius: 6px; transition: background 0.2s; }
+        .checkbox-label:hover { background: rgba(255,255,255,0.02); color: var(--text); }
+        .checkbox-input { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+
+        .form-actions { display: flex; gap: 12px; margin-top: 32px; border-top: 1px solid var(--border); padding-top: 20px; }
+        .btn-submit { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; transition: transform 0.2s; }
+        .btn-submit:hover { transform: translateY(-2px); }
+        .btn-cancel { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; border: 1px solid var(--border); color: var(--text2); text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+        .btn-cancel:hover { background: var(--surface2); color: var(--text); }
+    </style>
+</head>
+<body>
+
+<div class="bg-decor"></div>
+<div th:replace="~{fragments :: sidebar(activePage='roles')}"></div>
+
+<main class="main-content">
+    <div style="margin-bottom: 24px; position: relative; z-index: 2; display: flex; align-items: center; gap: 16px;">
+        <a th:href="@{/roles}"></a>
+        <h1 class="page-title" style="margin: 0;">Rolni tahrirlash</h1>
+    </div>
+
+    <div class="form-container">
+        <form th:action="@{/roles/update/{id}(id=${roleId})}" th:object="${dto}" method="post">
+            <div th:replace="~{fragments :: alert-error}"></div>
+            <div class="form-group">
+                <label class="form-label" for="name">Rol nomi</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Masalan: Oshpaz" required/>
+                <div class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Xatolik</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="code">Rol kodi (System Code)</label>
+                <input type="text" id="code" th:field="*{code}" class="form-control" placeholder="Masalan: CHEF" required/>
+                <div class="error-message" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Xatolik</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Huquqlarni biriktirish</label>
+                <div class="permissions-grid">
+                    <label th:each="permission : ${allPermissions}" class="checkbox-label">
+                        <input type="checkbox"
+                               th:field="*{permissionIds}"
+                               th:value="${permission.id}"
+                               class="checkbox-input"/>
+                        <span th:text="${permission.name}">Huquq nomi</span>
+                    </label>
+                </div>
+                <div class="error-message" th:if="${#fields.hasErrors('permissionIds')}" th:errors="*{permissionIds}">Xatolik</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">O'zgarishlarni saqlash</button>
+                <a th:href="@{/roles}" class="btn-cancel">Bekor qilish</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

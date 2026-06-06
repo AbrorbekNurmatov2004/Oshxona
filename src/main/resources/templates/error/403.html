@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments :: header_head}"></th:block>
+    <title>Ruxsat berilmagan — Oshxona</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            text-align: center;
+            color: var(--text);
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            color: #ef4444; /* Qizil rang */
+            margin: 0;
+            line-height: 1;
+        }
+        .error-message {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+        }
+        .error-desc {
+            color: var(--text3);
+            margin-bottom: 30px;
+            max-width: 400px;
+        }
+        .btn-back {
+            background: var(--accent, #00796b);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .btn-back:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div th:replace="~{fragments :: sidebar(activePage='')}"></div>
+
+<main class="main-content">
+    <div class="error-container">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 64px; color: #ef4444;"></i>
+        <h1 class="error-code">403</h1>
+        <p class="error-message">Kechirasiz, sizga ruxsat berilmagan!</p>
+        <p class="error-desc">Ushbu sahifani ko'rish uchun sizda yetarli huquqlar yoki mos rollar mavjud emas.</p>
+        <a href="/users" class="btn-back"><i class="fa-solid fa-house"></i> Bosh sahifaga qaytish</a>
+    </div>
+</main>
+
+</body>
+</html>

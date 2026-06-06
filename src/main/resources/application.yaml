@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/oshxona_db
+    username: postgres
+    password: 2004
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+application:
+  file-path: D:/G59_JAVA/Modul_9/Oshxona/src/main/resources/images/
+  max-file-size: 10MB
+  allowed-types: image/jpeg,image/jpg,image/png
+  bot-token: ${MY_BOT_TOKEN}
+  bot-username: OshpazUzBot
