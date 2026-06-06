@@ -1,5 +1,12 @@
 # 🍳 Oshxona — Restaurant Management System MVC & Telegram Bot
 
+* **🤖 Telegram Bot:** [@OshpazUzBot](https://t.me/OshpazUzBot) 
+* **💻 Admin Panel:** [Oshxona Web Panel](https://oshxona-hudo.onrender.com/orders)
+
+> 🔑 **Admin login**
+> * **Phonenumber:** `1` 
+> * **Password:** `1`
+
 An enterprise-grade restaurant automation system built with **Java 17** and **Spring Boot 3**. The system consists of two core components: a **Spring MVC Web Panel** for administrators and an interactive **Telegram Bot** for customers.
 
 ---
